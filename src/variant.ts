@@ -42,6 +42,13 @@ export function module<Variant extends Tagged<string, any>>(
 
 // arguments are split to allow partial type inference
 // Note this function is only type safe with a true variant, not the super type Tagged<string, any>
+
+export function caseOf<Variant extends Tagged<string, any>, A>(
+  cases: Cases<Variant, A>
+): (variant: Variant) => A {
+  return (variant) => match(variant)(cases);
+}
+
 export function match<Variant extends Tagged<string, any>>(
   variant: Variant
 ): <A>(cases: Cases<Variant, A>) => A {
@@ -51,10 +58,13 @@ export function match<Variant extends Tagged<string, any>>(
     );
 }
 
-export function caseOf<Variant extends Tagged<string, any>, A>(
-  cases: Cases<Variant, A>
-): (variant: Variant) => A {
-  return (variant) => match(variant)(cases);
+export function caseOfWithDefault<A>(
+  defaultValue: A
+): <Variant extends Tagged<string, any>>(
+  partialCases: Partial<Cases<Variant, A>>
+) => (variant: Variant) => A {
+  return (partialCases) => (variant) =>
+    matchWithDefault(variant)(defaultValue)(partialCases);
 }
 
 export function matchWithDefault<Variant extends Tagged<string, any>>(
@@ -68,16 +78,7 @@ export function matchWithDefault<Variant extends Tagged<string, any>>(
   };
 }
 
-export function caseOfWithDefault<A>(
-  defaultValue: A
-): <Variant extends Tagged<string, any>>(
-  partialCases: Partial<Cases<Variant, A>>
-) => (variant: Variant) => A {
-  return (partialCases) => (variant) =>
-    matchWithDefault(variant)(defaultValue)(partialCases);
-}
-
-type Cases<Variant extends Tagged<string, any>, A> = {
+export type Cases<Variant extends Tagged<string, any>, A> = {
   [Key in keyof Map<Variant>]: (value: Map<Variant>[Key]) => A;
 };
 
