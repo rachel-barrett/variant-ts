@@ -4,9 +4,20 @@
   "description": "A library for variant types in typescript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "files": [
-    "lib"
-  ],
+  "exports": {
+    ".": "./lib/index.js",
+    "./churchVariant": "./lib/churchVariant.js"
+  },
+  "typesVersions": {
+    "*": {
+      "lib/index.d.ts": [
+        "lib/index.d.ts"
+      ],
+      "*": [
+        "lib/*"
+      ]
+    }
+  },
   "scripts": {
     "build": "tsc --build",
     "test": "cd test; ts-node index.ts",
