@@ -2,10 +2,15 @@
   "name": "variant-ts",
   "version": "1.0.0",
   "description": "A library for variant types in typescript",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "tsc --build",
-    "test": "cd test; ts-node index.ts"
+    "test": "cd test; ts-node index.ts",
+    "clean": "rm -r lib"
   },
   "author": "Rachel Barrett",
   "license": "ISC",
