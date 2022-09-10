@@ -1,5 +1,5 @@
 {
-  "name": "variant-ts",
+  "name": "@rachel-barrett/variant-ts",
   "version": "1.0.0",
   "description": "A library for variant types in typescript",
   "main": "lib/index.js",
