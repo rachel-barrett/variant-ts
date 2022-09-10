@@ -1,12 +1,12 @@
-import * as variant from "src/variant";
-import Variant = variant.Variant;
-import { pipe } from "fp-ts/function";
+import * as variant from "src/variant"
+import Variant = variant.Variant
+import { pipe } from "fp-ts/function"
 
 export type Media = Variant<{
-  book: number;
-  film: string;
-  song: string;
-}>;
+  book: number
+  film: string
+  song: string
+}>
 
 // export type Media =
 //     | Variant.Tagged<typeof book, number>
@@ -28,27 +28,27 @@ export const Media = variant.module<Media>({
   book: (value: number) => variant.tagged(_book, value),
   film: (value: string) => variant.tagged(_film, value),
   song: (value: string) => variant.tagged(_song, value),
-});
+})
 
-const _book = "book";
-const _film = "film";
-const _song = "song";
+const _book = "book"
+const _film = "film"
+const _song = "song"
 
 // examples
 
-export const bookExample = Media.book(123);
-export const filmExample = Media.film("Avatar");
+export const bookExample = Media.book(123)
+export const filmExample = Media.film("Avatar")
 
 // Note that the type parameter is needed here for the match to type check the case statements
 const test = variant.match(bookExample)({
   [_book]: (value) => `${value} is a book`,
   [_film]: (value) => `${value} is a film`,
   [_song]: (value) => `${value} is a film`,
-});
+})
 
 const test2 = variant.matchWithDefault(filmExample)(`Default case`)({
   [_book]: (value) => `${value} is a book`,
-});
+})
 
 const test3 = pipe(
   bookExample,
@@ -57,16 +57,16 @@ const test3 = pipe(
     [_film]: (value) => `${value} is a film`,
     [_song]: (value) => `${value} is a film`,
   })
-);
+)
 
 const test4 = pipe(
   filmExample,
   variant.caseOfWithDefault(`Default Case`)({
     [_book]: (value) => `${value} is a book`,
   })
-);
+)
 
-console.log(test);
-console.log(test2);
-console.log(test3);
-console.log(test4);
+console.log(test)
+console.log(test2)
+console.log(test3)
+console.log(test4)

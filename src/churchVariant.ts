@@ -6,14 +6,14 @@
 // ## type
 
 export type Variant<Map extends { [key: string]: any }> = <A>(cases: {
-  [Key in keyof Map]: (value: Map[Key]) => A;
-}) => A;
+  [Key in keyof Map]: (value: Map[Key]) => A
+}) => A
 
 // ## module
 
 export type Module<Variant extends (a: any) => any> = {
-  [Key in keyof Map<Variant>]: (value: Map<Variant>[Key]) => Variant;
-};
+  [Key in keyof Map<Variant>]: (value: Map<Variant>[Key]) => Variant
+}
 
 // The type of Variant (V) is not very constrained which is because:
 // If you try to constrain V by doing V extends Variant<Record<string, any>>
@@ -26,19 +26,19 @@ export type Module<Variant extends (a: any) => any> = {
 export type Map<Variant extends (a: any) => any> = {
   [Key in keyof Parameters<Variant>[0]]: Parameters<
     Parameters<Variant>[0][Key]
-  >[0];
-};
+  >[0]
+}
 
 // this is an identity function that just exists to give better type descriptions
 export function module<Variant extends (a: any) => any>(
   constructors: Module<Variant>
 ): Module<Variant> {
-  return constructors;
+  return constructors
 }
 
 // This is actually not fully type constrained as Map[typeof key] is the union type of all the keys not just the one selected key
 export function select<Map extends { [key: string]: any }>(
   key: keyof Map
 ): (value: Map[typeof key]) => Variant<Map> {
-  return (value) => (cases) => cases[key](value);
+  return (value) => (cases) => cases[key](value)
 }
