@@ -1,14 +1,36 @@
 This is helper library for constructing arbitrary variant types (aka sum types / discriminated unions) in typescript.
 
-This code would make sense as part of the fp-ts library.
+This library is intended to be used alongside [fp-ts](https://gcanti.github.io/fp-ts/), and indeed this code would make sense as part of that library.
 
-# publishing library locally
+## Example usage
 
-Use `npm link`
+```typescript
+import * as variant from "@rachel-barrett/variant-ts"
+import { pipe } from "fp-ts/function"
 
-This only needs to be run once in the root of this directory.
+type Media =
+  | Variant.Tagged<"book", number>
+  | Variant.Tagged<"film", string>
+  | Variant.Tagged<"song", string>
 
-Then run `npm link variant-ts` in the target directory.
+const Media = variant.module<Media>({
+  book: (value: number) => variant.tagged(_book, value),
+  film: (value: string) => variant.tagged(_film, value),
+  song: (value: string) => variant.tagged(_song, value),
+})
 
-# publishing library to npm
+const _book = "book"
+const _film = "film"
+const _song = "song"
+
+const exampleBook = Media.book(123)
+const exampleFilm = Media.film("Harry Potter")
+
+const isBook: (media: Media) => boolean = media => pipe(
+  media,
+  variant.caseOfWithDefault(false)({
+    [_book]: true
+  })
+)
+```
 
