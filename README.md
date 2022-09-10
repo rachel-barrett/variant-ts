@@ -9,9 +9,9 @@ import * as variant from "@rachel-barrett/variant-ts"
 import { pipe } from "fp-ts/function"
 
 type Media =
-  | Variant.Tagged<"book", number>
-  | Variant.Tagged<"film", string>
-  | Variant.Tagged<"song", string>
+  | variant.Tagged<"book", number>
+  | variant.Tagged<"film", string>
+  | variant.Tagged<"song", string>
 
 const Media = variant.module<Media>({
   book: (value: number) => variant.tagged(_book, value),
@@ -26,11 +26,12 @@ const _song = "song"
 const exampleBook = Media.book(123)
 const exampleFilm = Media.film("Harry Potter")
 
-const isBook: (media: Media) => boolean = media => pipe(
-  media,
-  variant.caseOfWithDefault(false)({
-    [_book]: true
-  })
-)
+const isBook: (media: Media) => boolean = (media) =>
+  pipe(
+    media,
+    variant.caseOfWithDefault(false)({
+      [_book]: () => true,
+    })
+  )
 ```
 
