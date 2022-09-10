@@ -18,8 +18,10 @@ export const Media = variant.module<Media>({
 
 export const bookExample = Media.book(123);
 
-export const test = bookExample({
+const test = bookExample({
   book: (value) => `${value} is a book`,
   film: (value) => `${value} is a film`,
   song: (value) => `${value} is a song`,
 });
+
+console.log(test);
