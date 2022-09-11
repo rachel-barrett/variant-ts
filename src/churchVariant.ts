@@ -1,6 +1,6 @@
 // The advantage of this module over the variant module is just that there is no dependency on union types (variants are built from their church encoding in terms of records and functions)
 // The disadvantage is that console.log does not work for church variants
-// and also looks like select function is not as constrained as we would like
+// and this is enough to make this module not really usable for me.
 // other than that the modules are the same
 
 // ## type
@@ -36,10 +36,9 @@ export function module<Variant extends (a: any) => any>(
   return constructors
 }
 
-// This is actually not fully type constrained as Map[typeof key] is the union type of all the keys not just the one selected key
-export function tagged<
-  Map extends { [key: string]: any },
-  Key extends keyof Map
->(key: Key, value: Map[Key]): Variant<Map> {
+export function tagged<Key extends string, Map extends Record<Key, any>>(
+  key: Key,
+  value: Map[Key]
+): Variant<Map> {
   return cases => cases[key](value)
 }
