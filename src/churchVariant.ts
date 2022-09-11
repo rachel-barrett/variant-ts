@@ -3,7 +3,7 @@
 // The advantage of this module over the variant module is just that there is no dependency on union types
 // (variants are built from their church encoding in terms of records and functions)
 // Which means this code can work in any language which has records and functions
-// The disadvantage though is that console.log is not helpful for church variants
+// The disadvantage though is that console.log is not helpful and built in equals does not work for church variants
 // which is enough to make this module not really usable for me.
 // Another disadvantage is that we can't make a caseOfWithDefault
 

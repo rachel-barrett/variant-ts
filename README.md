@@ -1,6 +1,6 @@
 # variant-ts
 
-This is helper library for constructing arbitrary variant types (aka sum types / discriminated unions / ADTs) in typescript.
+This is a helper library for constructing arbitrary variant types (aka sum types / discriminated unions / ADTs) in typescript.
 
 This library is intended to be used alongside [fp-ts](https://gcanti.github.io/fp-ts/), and indeed this code could make sense as part of that library.
 
@@ -36,3 +36,7 @@ const isBook: (media: Media) => boolean = media =>
     })
   )
 ```
+
+## NB
+
+The `churchVariant` module that is exported as part of this library is an experimental module that shouldn't really be used. It is subject to change and will likely be removed.
