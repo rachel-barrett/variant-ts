@@ -37,8 +37,9 @@ export function module<Variant extends (a: any) => any>(
 }
 
 // This is actually not fully type constrained as Map[typeof key] is the union type of all the keys not just the one selected key
-export function select<Map extends { [key: string]: any }>(
-  key: keyof Map
-): (value: Map[typeof key]) => Variant<Map> {
-  return value => cases => cases[key](value)
+export function tagged<Map extends { [key: string]: any }>(
+  key: keyof Map,
+  value: Map[typeof key]
+): Variant<Map> {
+  return cases => cases[key](value)
 }

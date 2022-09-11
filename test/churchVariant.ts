@@ -10,10 +10,14 @@ export type Media = Variant<{
 
 // This isn't totally type constrained as you can choose any tag to go with any function name
 export const Media = variant.module<Media>({
-  book: value => variant.select("book")(value),
-  film: value => variant.select("film")(value),
-  song: value => variant.select("song")(value),
+  book: value => variant.tagged(_book, value),
+  film: value => variant.tagged(_film, value),
+  song: value => variant.tagged(_song, value),
 })
+
+const _book = "book"
+const _film = "film"
+const _song = "song"
 
 // examples
 
