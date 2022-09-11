@@ -1,8 +1,9 @@
 ~Make a PR on fp-ts
 /Improve the tests
 /show for church variant
+X Make variant and churchVariant interchangeable by adding match and caseOf functions to churchVariant. Can't as churchVariant doesn't work with caseOfWithDefault
+Documentation on how to create a case with a void type.
 Add neater inline documentation like on fp-ts
 Deprecate and rename to variant-ts
 Should the return type of Module be Tagged<Key, Map<Variant>[Key]> instead of Variant
-Make variant and churchVariant interchangeable by adding match and caseOf functions to churchVariant
 Remove church variant (at least from exports)? since it is not the preferred way, it was more of an experiment
