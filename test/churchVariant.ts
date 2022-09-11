@@ -1,5 +1,6 @@
 import * as variant from "src/churchVariant"
 import Variant = variant.Variant
+import { assertEquals, group, test } from "@rachel-barrett/test-js"
 
 export type Media = Variant<{
   book: number
@@ -18,10 +19,19 @@ export const Media = variant.module<Media>({
 
 export const bookExample = Media.book(123)
 
-const test = bookExample({
-  book: value => `${value} is a book`,
-  film: value => `${value} is a film`,
-  song: value => `${value} is a song`,
-})
+const show: (media: Media) => string = media =>
+  media({
+    book: value => `Book: ${value}`,
+    film: value => `Film: ${value}`,
+    song: value => `Song: ${value}`,
+  })
 
-console.log(test)
+// tests
+
+group("churchVariant")(() => {
+  test("pattern matching")(() => {
+    const expected = "Book: 123"
+    const actual = show(bookExample)
+    return assertEquals({ actual, expected })
+  })
+})
