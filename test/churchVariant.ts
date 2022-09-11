@@ -23,19 +23,24 @@ const _song = "song"
 
 export const bookExample = Media.book(123)
 
-const show: (media: Media) => string = media =>
+const whatAmI: (media: Media) => string = media =>
   media({
-    book: value => `Book: ${value}`,
-    film: value => `Film: ${value}`,
-    song: value => `Song: ${value}`,
+    book: value => `${value} is a book!`,
+    film: value => `${value} is a film!`,
+    song: value => `${value} is a song!`,
   })
 
 // tests
 
 group("churchVariant")(() => {
   test("pattern matching")(() => {
-    const expected = "Book: 123"
-    const actual = show(bookExample)
+    const expected = "123 is a book!"
+    const actual = whatAmI(bookExample)
+    return assertEquals({ actual, expected })
+  })
+  test("show")(() => {
+    const expected = "book: 123"
+    const actual = variant.show(Media)(bookExample)
     return assertEquals({ actual, expected })
   })
 })

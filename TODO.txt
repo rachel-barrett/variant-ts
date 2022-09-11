@@ -1,7 +1,8 @@
 ~Make a PR on fp-ts
 /Improve the tests
+/show for church variant
 Add neater inline documentation like on fp-ts
-show for church variant
-Remove church variant (at least from exports)? since it is not the preferred way, it was more of an experiment
-Should the return type of Module be Tagged<Key, Map<Variant>[Key]> instead of Variant
 Deprecate and rename to variant-ts
+Should the return type of Module be Tagged<Key, Map<Variant>[Key]> instead of Variant
+Make variant and churchVariant interchangeable by adding match and caseOf functions to churchVariant
+Remove church variant (at least from exports)? since it is not the preferred way, it was more of an experiment
