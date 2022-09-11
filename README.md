@@ -1,8 +1,8 @@
 # variant-ts
 
-This is helper library for constructing arbitrary variant types (aka sum types / discriminated unions) in typescript.
+This is helper library for constructing arbitrary variant types (aka sum types / discriminated unions / ADTs) in typescript.
 
-This library is intended to be used alongside [fp-ts](https://gcanti.github.io/fp-ts/), and indeed this code would make sense as part of that library.
+This library is intended to be used alongside [fp-ts](https://gcanti.github.io/fp-ts/), and indeed this code could make sense as part of that library.
 
 ## Example usage
 
