@@ -1,4 +1,3 @@
-
 ## publishing library locally
 
 Use `npm link`. This only needs to be run once in the root of this directory.

@@ -40,5 +40,5 @@ export function module<Variant extends (a: any) => any>(
 export function select<Map extends { [key: string]: any }>(
   key: keyof Map
 ): (value: Map[typeof key]) => Variant<Map> {
-  return (value) => (cases) => cases[key](value)
+  return value => cases => cases[key](value)
 }

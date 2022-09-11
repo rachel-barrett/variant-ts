@@ -25,9 +25,9 @@ export type Media = Variant<{
 // Note that type parameter is needed here to check it's correct
 
 export const Media = variant.module<Media>({
-  book: (value: number) => variant.tagged(_book, value),
-  film: (value: string) => variant.tagged(_film, value),
-  song: (value: string) => variant.tagged(_song, value),
+  book: value => variant.tagged(_book, value),
+  film: value => variant.tagged(_film, value),
+  song: value => variant.tagged(_song, value),
 })
 
 const _book = "book"
@@ -41,28 +41,28 @@ export const filmExample = Media.film("Avatar")
 
 // Note that the type parameter is needed here for the match to type check the case statements
 const test = variant.match(bookExample)({
-  [_book]: (value) => `${value} is a book`,
-  [_film]: (value) => `${value} is a film`,
-  [_song]: (value) => `${value} is a film`,
+  [_book]: value => `${value} is a book`,
+  [_film]: value => `${value} is a film`,
+  [_song]: value => `${value} is a film`,
 })
 
 const test2 = variant.matchWithDefault(filmExample)(`Default case`)({
-  [_book]: (value) => `${value} is a book`,
+  [_book]: value => `${value} is a book`,
 })
 
 const test3 = pipe(
   bookExample,
   variant.caseOf({
-    [_book]: (value) => `${value} is a book`,
-    [_film]: (value) => `${value} is a film`,
-    [_song]: (value) => `${value} is a film`,
+    [_book]: value => `${value} is a book`,
+    [_film]: value => `${value} is a film`,
+    [_song]: value => `${value} is a film`,
   })
 )
 
 const test4 = pipe(
   filmExample,
   variant.caseOfWithDefault(`Default Case`)({
-    [_book]: (value) => `${value} is a book`,
+    [_book]: value => `${value} is a book`,
   })
 )
 

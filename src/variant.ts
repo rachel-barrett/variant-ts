@@ -46,13 +46,13 @@ export function module<Variant extends Tagged<string, any>>(
 export function caseOf<Variant extends Tagged<string, any>, A>(
   cases: Cases<Variant, A>
 ): (variant: Variant) => A {
-  return (variant) => match(variant)(cases)
+  return variant => match(variant)(cases)
 }
 
 export function match<Variant extends Tagged<string, any>>(
   variant: Variant
 ): <A>(cases: Cases<Variant, A>) => A {
-  return (cases) =>
+  return cases =>
     (cases as Record<string, any>)[variant[tagFieldName]](
       variant[valueFieldName]
     )
@@ -63,14 +63,14 @@ export function caseOfWithDefault<A>(
 ): <Variant extends Tagged<string, any>>(
   partialCases: Partial<Cases<Variant, A>>
 ) => (variant: Variant) => A {
-  return (partialCases) => (variant) =>
+  return partialCases => variant =>
     matchWithDefault(variant)(defaultValue)(partialCases)
 }
 
 export function matchWithDefault<Variant extends Tagged<string, any>>(
   variant: Variant
 ): <A>(defaultValue: A) => (partialCases: Partial<Cases<Variant, A>>) => A {
-  return (defaultValue) => (partialCases) => {
+  return defaultValue => partialCases => {
     const caseFunction = (partialCases as Record<string, any>)[
       variant[tagFieldName]
     ]

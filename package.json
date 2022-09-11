@@ -20,6 +20,7 @@
   },
   "scripts": {
     "build": "tsc --build",
+    "format": "prettier --write .",
     "test": "cd test; ts-node index.ts",
     "clean": "rm -r lib"
   },
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@rachel-barrett/test-js": "^2.0.0",
     "fp-ts": "^2.12.3",
+    "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.0",
     "typescript": "^4.8.3"

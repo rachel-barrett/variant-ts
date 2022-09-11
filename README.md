@@ -1,4 +1,3 @@
-
 # variant-ts
 
 This is helper library for constructing arbitrary variant types (aka sum types / discriminated unions) in typescript.
@@ -17,9 +16,9 @@ type Media =
   | variant.Tagged<"song", string>
 
 const Media = variant.module<Media>({
-  book: (value: number) => variant.tagged(_book, value),
-  film: (value: string) => variant.tagged(_film, value),
-  song: (value: string) => variant.tagged(_song, value),
+  book: value => variant.tagged(_book, value),
+  film: value => variant.tagged(_film, value),
+  song: value => variant.tagged(_song, value),
 })
 
 const _book = "book"
@@ -29,7 +28,7 @@ const _song = "song"
 const exampleBook = Media.book(123)
 const exampleFilm = Media.film("Harry Potter")
 
-const isBook: (media: Media) => boolean = (media) =>
+const isBook: (media: Media) => boolean = media =>
   pipe(
     media,
     variant.caseOfWithDefault(false)({
@@ -37,4 +36,3 @@ const isBook: (media: Media) => boolean = (media) =>
     })
   )
 ```
-
