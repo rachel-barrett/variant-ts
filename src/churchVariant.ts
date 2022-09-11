@@ -1,8 +1,8 @@
 // The advantage of this module over the variant module is just that there is no dependency on union types (variants are built from their church encoding in terms of records and functions)
-// The disadvantage is that console.log does not work for church variants
-// The best we can do is provide a show function (see below) that must be called.
-// The fact console.log won't work is enough to make this module not really usable for me.
-// Other than that the modules are the same
+// Which means this code can work in any language which has records and functions
+// The disadvantage is that console.log is not helpful for church variants
+// which is enough to make this module not really usable for me.
+// The other difference is that we don't have a caseOfWithDefault
 
 // ## type
 
@@ -42,14 +42,4 @@ export function tagged<Key extends string, Map extends Record<Key, any>>(
   value: Map[Key]
 ): Variant<Map> {
   return cases => cases[key](value)
-}
-
-export function show<Map extends { [key: string]: any }>(
-  module: Module<Variant<Map>>
-): (variant: Variant<Map>) => string {
-  const encodeAcc: any = {}
-  for (const key in module) {
-    encodeAcc[key] = (value: any) => `${key}: ${value}`
-  }
-  return variant => variant(encodeAcc)
 }

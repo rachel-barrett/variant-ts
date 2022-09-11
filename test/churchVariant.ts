@@ -38,9 +38,4 @@ group("churchVariant")(() => {
     const actual = whatAmI(bookExample)
     return assertEquals({ actual, expected })
   })
-  test("show")(() => {
-    const expected = "book: 123"
-    const actual = variant.show(Media)(bookExample)
-    return assertEquals({ actual, expected })
-  })
 })
